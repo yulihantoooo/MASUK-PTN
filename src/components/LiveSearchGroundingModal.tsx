@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, X, Globe, ExternalLink, Send, RefreshCw, AlertCircle, BookCheck } from 'lucide-react';
 import { StudentInputData, PredictionResult } from '../types/snbp';
+import { StructuredAnalysisViewer } from './StructuredAnalysisViewer';
 
 interface LiveSearchGroundingModalProps {
   isOpen: boolean;
@@ -28,6 +29,10 @@ export const LiveSearchGroundingModal: React.FC<LiveSearchGroundingModalProps> =
   const [customQuestion, setCustomQuestion] = useState('');
 
   if (!isOpen) return null;
+
+  const parseErrorMessage = (_err: any): string => {
+    return 'Gagal memuat konsultasi secara online. Silakan klik tombol Muat Ulang untuk mencoba kembali.';
+  };
 
   const handleFetchConsultation = async (overridePrompt?: string) => {
     setLoading(true);
@@ -82,8 +87,7 @@ export const LiveSearchGroundingModal: React.FC<LiveSearchGroundingModalProps> =
       setSearchQueries(data.webSearchQueries || []);
       setSources(data.sources || []);
     } catch (err: any) {
-      console.error(err);
-      setError(err?.message || 'Gagal menghubungi server konsultasi AI');
+      setError(parseErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -100,13 +104,13 @@ export const LiveSearchGroundingModal: React.FC<LiveSearchGroundingModalProps> =
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-lg font-bold text-white">Live Search Grounding SNBP</h3>
+                <h3 className="text-lg font-bold text-white">Live Intelligence & Search Grounding SNBP</h3>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                  gemini-3.8-flash + Google Search
+                  Pencarian Terpadu SNBP
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Data aktual daya tampung, peminat resmi SNPMB, keketatan, dan strategi lolos terverifikasi
+                Data aktual daya tampung, peminat resmi SNPMB, keketatan, dan strategi kelolosan terverifikasi
               </p>
             </div>
           </div>
@@ -160,9 +164,8 @@ export const LiveSearchGroundingModal: React.FC<LiveSearchGroundingModalProps> =
               <div>
                 <h4 className="text-base font-bold text-white">Hubungkan ke Data SNBP Aktual</h4>
                 <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                  Fitur ini menggunakan model <code className="text-cyan-300">gemini-3.8-flash</code> dengan kemampuan
-                  <strong> Google Search Grounding</strong> untuk menelusuri data kuota daya tampung SNPMB terbaru,
-                  peminat tahun sebelumnya, dan akreditasi prodi secara real-time.
+                  Sistem Analisis Cerdas SNBP menelusuri data daya tampung SNPMB terbaru,
+                  peminat tahun sebelumnya, keketatan jurusan, dan regulasi Kepmendikdasmen No 102/M/2025 secara langsung.
                 </p>
               </div>
               <button
@@ -208,10 +211,12 @@ export const LiveSearchGroundingModal: React.FC<LiveSearchGroundingModalProps> =
                 </div>
               )}
 
-              {/* Consultation Markdown Content */}
-              <div className="p-5 rounded-xl bg-slate-950/40 border border-slate-800/80 text-xs sm:text-sm text-slate-200 leading-relaxed whitespace-pre-wrap font-sans">
-                {analysisText}
-              </div>
+              {/* Structured & Natural Analysis Viewer */}
+              <StructuredAnalysisViewer
+                rawText={analysisText}
+                ptnName={studentData.ptnChoice1.ptnName}
+                prodiName={studentData.ptnChoice1.prodiName}
+              />
 
               {/* Grounding Source Links */}
               {sources.length > 0 && (
