@@ -1,0 +1,6 @@
+{
+  "name": "SNBP PTN Predictor & Strategi Lolos 8 Faktor",
+  "description": "Aplikasi prediksi kelolosan SNBP Perguruan Tinggi Negeri berdasarkan 8 faktor penentu resmi, Kepmendikdasmen No 102/M/2025, dan Google Search Grounding. Dikembangkan oleh Yulianto Harsono.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
