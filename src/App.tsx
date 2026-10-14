@@ -301,7 +301,7 @@ export default function App() {
               <span className="text-xs text-slate-400">Total Bobot: 100 Poin</span>
             </div>
             <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              Kalkulator & Analisis 8 Faktor Kelolosan Masuk PTN
+              PREDIKSI SNBP UNTUK SMA/SMK
             </h1>
             <p className="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
               Dikembangkan oleh <strong>Yulianto Harsono</strong> dengan memadukan 8 faktor penentu resmi (Nilai Rapor, Prestasi Sertifikat, Alumni, Ranking Paralel, Akreditasi, Domisili, Mapel Pendukung Kepmen No 102/M/2025, KKM), serta konsultasi akurat dengan <strong>Gemini Google Search Grounding</strong>.
